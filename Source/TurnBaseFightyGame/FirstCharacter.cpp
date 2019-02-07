@@ -2,6 +2,7 @@
 
 #include "FirstCharacter.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/WidgetComponent.h"
 
 
 // Sets default values
@@ -39,3 +40,7 @@ void AFirstCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 }
 
+void AFirstCharacter::Attack()
+{
+	if(AttackButton.event.OnClicked == true)
+}

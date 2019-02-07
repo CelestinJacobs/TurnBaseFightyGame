@@ -26,6 +26,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void Attack();
+
 	UPROPERTY()
 	USceneComponent* Root;
 
@@ -38,7 +40,8 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	int Damage;
 
-
+	UPROPERTY(VisibleAnywhere)
+		UWidgetComponent* AttackButton;
 	
 	
 };
