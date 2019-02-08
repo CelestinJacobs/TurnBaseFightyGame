@@ -41,7 +41,7 @@ public:
 		int Damage;
 
 	UPROPERTY(VisibleAnywhere)
-		int IsTargeted;
+		bool IsTargeted;
 
 	UFUNCTION()
 		void Targeted(AActor* TouchedActor, FKey ButtonPressed);

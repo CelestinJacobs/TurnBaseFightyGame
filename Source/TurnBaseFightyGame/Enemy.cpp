@@ -17,7 +17,7 @@ AEnemy::AEnemy()
 
 	Health = 50;
 	Damage = 5;
-	IsTargeted = 0;
+	IsTargeted = false;
 }
 
 // Called when the game starts or when spawned
@@ -39,5 +39,5 @@ void AEnemy::Tick(float DeltaTime)
 void AEnemy::Targeted(AActor* TouchedActor, FKey ButtonPressed)
 {
 	UE_LOG(LogTemp, Log, TEXT("Targeted me!"));
-	IsTargeted = 1;
+	IsTargeted = true;
 }

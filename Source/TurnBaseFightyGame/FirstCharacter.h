@@ -51,6 +51,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<AEnemy*> enemy_list;
 
+	UPROPERTY()
+	AEnemy* current_target;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UAttackUserWidget* widget;
@@ -58,6 +61,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void AttackButtonMade();
+	
 
 	
 };
