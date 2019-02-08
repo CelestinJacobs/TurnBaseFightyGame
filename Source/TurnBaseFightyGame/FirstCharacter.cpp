@@ -10,11 +10,13 @@ AFirstCharacter::AFirstCharacter()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	FirstCharacterAMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("FirstCharacterAMesh"));
-	FirstCharacterAMesh->AttachTo(Root);
+	
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	RootComponent = Root;
+	
+	FirstCharacterAMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("FirstCharacterAMesh"));
+	FirstCharacterAMesh->AttachTo(RootComponent);
+	
 	Health = 50;
 	Damage = 5;
 }
@@ -23,6 +25,7 @@ AFirstCharacter::AFirstCharacter()
 void AFirstCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	
 }
 
@@ -33,14 +36,17 @@ void AFirstCharacter::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void AFirstCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-}
-
+//this function will be called when someone presses a button in the UI!
 void AFirstCharacter::Attack()
 {
-	if(AttackButton.event.OnClicked == true)
+	UE_LOG(LogTemp, Log, TEXT("Attacking!"));
+}
+
+void AFirstCharacter::AttackButtonMade()
+{
+	if(this->widget)
+	{
+		this->widget->OnAttackButtonPressed.AddDynamic(this, &AFirstCharacter::Attack);
+	}	
 }

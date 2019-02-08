@@ -1,13 +1,14 @@
+
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "GameFramework/Pawn.h"
 #include "Enemy.generated.h"
 
 UCLASS()
-class TURNBASEFIGHTYGAME_API AEnemy : public AActor
+class TURNBASEFIGHTYGAME_API AEnemy : public APawn
 {
 	GENERATED_BODY()
 	
@@ -23,11 +24,26 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+
+	void Attack();
+
+	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
+		USceneComponent * Root;
+
+
+	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
+		UStaticMeshComponent* FirstCharacterAMesh;
+
 	UPROPERTY(VisibleAnywhere)
 		int Health;
 
 	UPROPERTY(VisibleAnywhere)
 		int Damage;
 
-	
+	UPROPERTY(VisibleAnywhere)
+		int IsTargeted;
+
+	UFUNCTION()
+		void Targeted(AActor* TouchedActor, FKey ButtonPressed);
+
 };

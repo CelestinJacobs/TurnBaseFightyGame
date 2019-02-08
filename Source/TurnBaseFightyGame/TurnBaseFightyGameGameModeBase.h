@@ -13,8 +13,7 @@ UCLASS()
 class TURNBASEFIGHTYGAME_API ATurnBaseFightyGameGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
-	
+
 	
 	
 };

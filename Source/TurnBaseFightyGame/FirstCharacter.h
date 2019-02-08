@@ -4,7 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Enemy.h"
+#include "AttackUserWidget.h"
+
+
+
+
 #include "FirstCharacter.generated.h"
+
+
 
 UCLASS()
 class TURNBASEFIGHTYGAME_API AFirstCharacter : public APawn
@@ -23,15 +31,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	UFUNCTION(BlueprintCallable)
 	void Attack();
 
-	UPROPERTY()
-	USceneComponent* Root;
+	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
+	USceneComponent * Root;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+
+	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* FirstCharacterAMesh;
 
 	UPROPERTY(VisibleAnywhere)
@@ -40,8 +47,17 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	int Damage;
 
-	UPROPERTY(VisibleAnywhere)
-		UWidgetComponent* AttackButton;
-	
+
+	UPROPERTY(EditAnywhere)
+	TArray<AEnemy*> enemy_list;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UAttackUserWidget* widget;
+
+
+	UFUNCTION(BlueprintCallable)
+	void AttackButtonMade();
+
 	
 };
