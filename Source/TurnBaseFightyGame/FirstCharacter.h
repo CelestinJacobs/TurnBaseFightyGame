@@ -49,7 +49,7 @@ public:
 
 
 	UPROPERTY(EditAnywhere)
-	TArray<AEnemy*> enemy_list;
+	TArray<class AEnemy*> enemy_list;
 
 	UPROPERTY()
 	AEnemy* current_target;
@@ -62,6 +62,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AttackButtonMade();
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool PlayerTurn;
 
+	UFUNCTION(BlueprintCallable)
+	void EndTurn();
 	
 };

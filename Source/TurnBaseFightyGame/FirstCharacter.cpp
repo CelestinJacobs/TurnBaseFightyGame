@@ -19,6 +19,7 @@ AFirstCharacter::AFirstCharacter()
 	
 	Health = 50;
 	Damage = 5;
+	PlayerTurn = true;
 }
 
 // Called when the game starts or when spawned
@@ -34,7 +35,26 @@ void AFirstCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+
+	if (this->widget) {
+		if (PlayerTurn) {
+			this->widget->SetVisibility(ESlateVisibility::Visible);
+		}
+		else {
+			this->widget->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
 }
+
+
+void AFirstCharacter::AttackButtonMade()
+{
+	if (this->widget)
+	{
+		this->widget->OnAttackButtonPressed.AddDynamic(this, &AFirstCharacter::Attack);
+	}
+}
+
 
 
 //this function will be called when someone presses a button in the UI!
@@ -64,22 +84,28 @@ void AFirstCharacter::Attack()
 		UE_LOG(LogTemp, Log, TEXT("before %d"), current_target->Health);
 		current_target->Health -= this->Damage;
 		current_target->IsTargeted = false;
+		if(current_target->Health <= 0)
+		{
+			UE_LOG(LogTemp, Log, TEXT("Target Eliminated!"));
+			current_target->Destroy();
+		}
+
 		UE_LOG(LogTemp, Log, TEXT("after %d"), current_target->Health);
+		PlayerTurn = false;
+
+
+		//TODO: select who's turn it is next? because it's not the players anymore. 
+		this->enemy_list[0]->EnemyTurn = true;
 
 		//maybe check if they is ded?
 	}
-
-	if(Health != 0)
-	{
-		UE_LOG(LogTemp, Log, TEXT("Target Eliminated!"));
-		current_target->Destroy();
-	}
 }
 
-void AFirstCharacter::AttackButtonMade()
+void AFirstCharacter::EndTurn()
 {
-	if (this->widget)
+	/*if (PlayerTurn = false)
 	{
-		this->widget->OnAttackButtonPressed.AddDynamic(this, &AFirstCharacter::Attack);
-	}
+		AEnemy->EnemyTurn = true
+	}*/
 }
+

@@ -18,6 +18,8 @@ AEnemy::AEnemy()
 	Health = 50;
 	Damage = 5;
 	IsTargeted = false;
+	AmDead = false;
+	EnemyTurn = false;
 }
 
 // Called when the game starts or when spawned
@@ -41,3 +43,16 @@ void AEnemy::Targeted(AActor* TouchedActor, FKey ButtonPressed)
 	UE_LOG(LogTemp, Log, TEXT("Targeted me!"));
 	IsTargeted = true;
 }
+
+
+/*
+void AEnemy::Dead(AFirstCharacter * Attack)//(&AFirstCharacter::Attack)
+{
+	if (Health != 0)
+	{
+		AmDead = true;
+		UE_LOG(LogTemp, Log, TEXT("Target Eliminated!"));
+		current_target->Destroy();
+		
+	}
+}*/

@@ -4,6 +4,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FirstCharacter.h"
 #include "GameFramework/Pawn.h"
 #include "Enemy.generated.h"
 
@@ -32,7 +33,7 @@ public:
 
 
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
-		UStaticMeshComponent* FirstCharacterAMesh;
+	class UStaticMeshComponent* FirstCharacterAMesh;
 
 	UPROPERTY(VisibleAnywhere)
 		int Health;
@@ -45,5 +46,17 @@ public:
 
 	UFUNCTION()
 		void Targeted(AActor* TouchedActor, FKey ButtonPressed);
+
+	UPROPERTY(VisibleAnywhere)
+		bool AmDead;
+
+	//UFUNCTION(BlueprintCallable)
+		//void Dead(AFirstCharacter* Attack);
+
+	UPROPERTY(VisibleAnywhere)
+		bool EnemyTurn;
+
+
+
 
 };
