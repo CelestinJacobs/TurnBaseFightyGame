@@ -13,7 +13,7 @@ AEnemy::AEnemy()
 	RootComponent = Root;
 
 	FirstCharacterAMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("FirstCharacterAMesh"));
-	FirstCharacterAMesh->AttachTo(RootComponent);
+	FirstCharacterAMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 	Health = 50;
 	Damage = 5;
@@ -43,6 +43,14 @@ void AEnemy::Targeted(AActor* TouchedActor, FKey ButtonPressed)
 	UE_LOG(LogTemp, Log, TEXT("Targeted me!"));
 	IsTargeted = true;
 }
+
+void AEnemy::EnemyAttack()
+{
+	UE_LOG(LogTemp, Log, TEXT("before %d"), player->Health);
+	player->Health -= this->Damage;
+	UE_LOG(LogTemp, Log, TEXT("after %d"), player->Health);
+}
+
 
 
 /*

@@ -26,6 +26,10 @@ AFirstCharacter::AFirstCharacter()
 void AFirstCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	for (AEnemy* enemy : this->enemy_list) {
+		enemy->player = this;
+	}
 	
 	
 }

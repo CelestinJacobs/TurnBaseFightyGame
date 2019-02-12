@@ -25,12 +25,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-
-	void Attack();
-
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
 		USceneComponent * Root;
 
+
+	UPROPERTY()
+		class AFirstCharacter* player;
 
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
 	class UStaticMeshComponent* FirstCharacterAMesh;
@@ -55,6 +55,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 		bool EnemyTurn;
+
+	UFUNCTION()
+		void EnemyAttack();
 
 
 
