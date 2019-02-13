@@ -30,7 +30,7 @@ void AFirstCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	for (AEnemy* enemy : this->enemy_list) {
-		enemy->player = this;
+		enemy->Player = this;
 	}
 	
 	
@@ -43,7 +43,7 @@ void AFirstCharacter::Tick(float DeltaTime)
 
 
 	if (this->widget) {
-		if (PlayerTurn) {
+		if (PlayerTurn == true) {
 			this->widget->SetVisibility(ESlateVisibility::Visible);
 		}
 		else {
@@ -98,10 +98,11 @@ void AFirstCharacter::Attack()
 
 		UE_LOG(LogTemp, Log, TEXT("after %d"), current_target->Health);
 		AttacksFinished = true;
+		EndTurn();
 
 
 		//TODO: select who's turn it is next? because it's not the players anymore. 
-		this->enemy_list[0]->EnemyTurn = true;
+		//this->enemy_list[0]->EnemyTurn = true;
 
 		//maybe check if they is ded?
 	}
@@ -113,6 +114,7 @@ void AFirstCharacter::EndTurn()
 	if (AttacksFinished == true)
 	{
 		PlayerTurnFinished = true;
+		UE_LOG(LogTemp, Log, TEXT("Turn has ended"));
 	}
 }
 

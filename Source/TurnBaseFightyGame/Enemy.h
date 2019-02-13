@@ -30,7 +30,7 @@ public:
 
 
 	UPROPERTY()
-		class AFirstCharacter* player;
+		class AFirstCharacter* Player;
 
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
 	class UStaticMeshComponent* FirstCharacterAMesh;

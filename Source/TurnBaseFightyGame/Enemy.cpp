@@ -48,9 +48,9 @@ void AEnemy::Targeted(AActor* TouchedActor, FKey ButtonPressed)
 
 void AEnemy::EnemyAttack()
 {
-	UE_LOG(LogTemp, Log, TEXT("before %d"), player->Health);
-	player->Health -= this->Damage;
-	UE_LOG(LogTemp, Log, TEXT("after %d"), player->Health);
+	UE_LOG(LogTemp, Log, TEXT("before %d"), Player->Health);
+	Player->Health -= this->Damage;
+	UE_LOG(LogTemp, Log, TEXT("after %d"), Player->Health);
 	EnemyAttackFinished = true;
 }
 

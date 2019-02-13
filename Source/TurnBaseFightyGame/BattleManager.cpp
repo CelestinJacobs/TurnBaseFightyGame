@@ -25,7 +25,11 @@ void ABattleManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-
+	if (this->Player->PlayerTurn == false) {
+		NextTurn();
+		UE_LOG(LogTemp, Log, TEXT("Next Turn"));
+	}
+	
 	//play a countdown or start animation?!?!?!
 }
 
@@ -34,14 +38,15 @@ void ABattleManager::StartTurn()
 	if (TurnCount % 4 == 0) {
 		this->Player->PlayerTurn = true;
 		this->Player->PlayerTurnFinished = false;
+		UE_LOG(LogTemp, Log, TEXT("Turn Count %d"), TurnCount);
 	}
-		
 }
 
 void ABattleManager::NextTurn()
 {
 	if (this->Player->PlayerTurnFinished) {
 		TurnCount++;
+		UE_LOG(LogTemp, Log, TEXT("Turn Count %d"), TurnCount);
 	}
 
 
@@ -58,7 +63,10 @@ void ABattleManager::NextTurn()
 		this->enemy_list[turn_mod - 1]->EnemyAttackFinished = false;
 		this->enemy_list[turn_mod - 1]->EnemyAttack();
 	}
-
+	
+	if (this->enemy_list[turn_mod - 1]->EnemyTurnFinished) {
+		TurnCount++;
+		}
 }
 
 
