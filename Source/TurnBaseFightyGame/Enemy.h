@@ -59,6 +59,16 @@ public:
 	UFUNCTION()
 		void EnemyAttack();
 
+	UPROPERTY()
+		bool EnemyAttackFinished;
+
+	UPROPERTY()
+		bool EnemyTurnFinished;
+
+	UFUNCTION()
+		void EnemyEndTurn();
+
+	
 
 
 

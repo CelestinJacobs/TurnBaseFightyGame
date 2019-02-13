@@ -43,12 +43,20 @@ void ABattleManager::NextTurn()
 	if (this->Player->PlayerTurnFinished) {
 		TurnCount++;
 	}
-	if (TurnCount % 4 != 0) {
 
-		//TurnCount % 4 != 0 => 0,1,2,3. 0 is players go, 1,2,3 is enemies go.
-		//TurnCount % 4 - 1 => -1,0,1,2
 
-		this->Player->enemy_list[0]->EnemyTurn = true;
+	int turn_mod = TurnCount % 4;
+	if (turn_mod == 0) {
+		//its the players go!
+	}
+	else {
+		//this is the enemies go.
+		//the enemies turn is decided by looking at the current turn count 
+		// TurnCount % 4 - 1  = 0,1,2.
+		this->enemy_list[turn_mod - 1]->EnemyTurn = true;
+		this->enemy_list[turn_mod - 1]->EnemyTurnFinished = false;
+		this->enemy_list[turn_mod - 1]->EnemyAttackFinished = false;
+		this->enemy_list[turn_mod - 1]->EnemyAttack();
 	}
 
 }

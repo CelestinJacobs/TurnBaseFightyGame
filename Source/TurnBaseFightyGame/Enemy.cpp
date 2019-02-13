@@ -20,6 +20,8 @@ AEnemy::AEnemy()
 	IsTargeted = false;
 	AmDead = false;
 	EnemyTurn = false;
+	EnemyAttackFinished = true;
+	EnemyTurnFinished = true;
 }
 
 // Called when the game starts or when spawned
@@ -49,7 +51,22 @@ void AEnemy::EnemyAttack()
 	UE_LOG(LogTemp, Log, TEXT("before %d"), player->Health);
 	player->Health -= this->Damage;
 	UE_LOG(LogTemp, Log, TEXT("after %d"), player->Health);
+	EnemyAttackFinished = true;
 }
+
+void AEnemy::EnemyEndTurn()
+{
+
+	if (EnemyAttackFinished == true)
+	{
+		EnemyTurnFinished = true;
+	}
+}
+
+
+
+
+
 
 
 
