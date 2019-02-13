@@ -19,7 +19,9 @@ AFirstCharacter::AFirstCharacter()
 	
 	Health = 50;
 	Damage = 5;
-	PlayerTurn = true;
+	PlayerTurn = false;
+	AttacksFinished = false;
+	PlayerTurnFinished = true;
 }
 
 // Called when the game starts or when spawned
@@ -95,7 +97,7 @@ void AFirstCharacter::Attack()
 		}
 
 		UE_LOG(LogTemp, Log, TEXT("after %d"), current_target->Health);
-		PlayerTurn = false;
+		AttacksFinished = true;
 
 
 		//TODO: select who's turn it is next? because it's not the players anymore. 
@@ -107,9 +109,10 @@ void AFirstCharacter::Attack()
 
 void AFirstCharacter::EndTurn()
 {
-	/*if (PlayerTurn = false)
+
+	if (AttacksFinished == true)
 	{
-		AEnemy->EnemyTurn = true
-	}*/
+		PlayerTurnFinished = true;
+	}
 }
 

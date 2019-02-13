@@ -68,4 +68,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void EndTurn();
 	
+	UPROPERTY()
+		bool AttacksFinished;
+
+	UPROPERTY()
+		bool PlayerTurnFinished;
 };
