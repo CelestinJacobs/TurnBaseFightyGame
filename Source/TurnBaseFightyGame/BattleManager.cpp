@@ -44,29 +44,43 @@ void ABattleManager::StartTurn()
 
 void ABattleManager::NextTurn()
 {
-	if (this->Player->PlayerTurnFinished) {
-		TurnCount++;
-		UE_LOG(LogTemp, Log, TEXT("Turn Count %d"), TurnCount);
-	}
-
-
 	int turn_mod = TurnCount % 4;
 	if (turn_mod == 0) {
-		//its the players go!
+		if (this->Player->PlayerTurnFinished) {
+			TurnCount++;
+			this->Player->PlayerTurnFinished = false;
+			this->Player->PlayerTurn = false;
+			UE_LOG(LogTemp, Log, TEXT("Turn Count %d"), TurnCount);
+		}
+		else {
+			//its the players go!
+			this->Player->PlayerTurn = true;
+			this->Player->PlayerTurnFinished = false;
+		}
 	}
 	else {
 		//this is the enemies go.
 		//the enemies turn is decided by looking at the current turn count 
 		// TurnCount % 4 - 1  = 0,1,2.
 		this->enemy_list[turn_mod - 1]->EnemyTurn = true;
-		this->enemy_list[turn_mod - 1]->EnemyTurnFinished = false;
-		this->enemy_list[turn_mod - 1]->EnemyAttackFinished = false;
-		this->enemy_list[turn_mod - 1]->EnemyAttack();
+		if (this->enemy_list[turn_mod - 1]->bHidden)
+		{
+			this->enemy_list[turn_mod - 1]->EnemyTurnFinished = true;
+			this->enemy_list[turn_mod - 1]->EnemyAttackFinished = true;
+		}
+		else {
+			this->enemy_list[turn_mod - 1]->EnemyTurnFinished = false;
+			this->enemy_list[turn_mod - 1]->EnemyAttackFinished = false;
+			this->enemy_list[turn_mod - 1]->EnemyAttack();
+		}
+
+		if (this->enemy_list[turn_mod - 1]->EnemyTurnFinished) {
+			TurnCount++;
+			UE_LOG(LogTemp, Log, TEXT("Turn Count %d"), TurnCount);
+		}
 	}
 	
-	if (this->enemy_list[turn_mod - 1]->EnemyTurnFinished) {
-		TurnCount++;
-		}
+	
 }
 
 

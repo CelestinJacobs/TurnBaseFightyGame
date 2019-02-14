@@ -51,7 +51,14 @@ void AEnemy::EnemyAttack()
 	UE_LOG(LogTemp, Log, TEXT("before %d"), Player->Health);
 	Player->Health -= this->Damage;
 	UE_LOG(LogTemp, Log, TEXT("after %d"), Player->Health);
+	if (Player->Health <= 0)
+	{
+		UE_LOG(LogTemp, Log, TEXT("Target Eliminated!"));
+		Player->SetActorHiddenInGame(true);
+	}
 	EnemyAttackFinished = true;
+	EnemyTurnFinished = true;
+
 }
 
 void AEnemy::EnemyEndTurn()

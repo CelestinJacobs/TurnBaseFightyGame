@@ -18,7 +18,7 @@ AFirstCharacter::AFirstCharacter()
 	FirstCharacterAMesh->AttachTo(RootComponent);
 	
 	Health = 50;
-	Damage = 5;
+	Damage = 20;
 	PlayerTurn = false;
 	AttacksFinished = false;
 	PlayerTurnFinished = true;
@@ -67,6 +67,9 @@ void AFirstCharacter::AttackButtonMade()
 void AFirstCharacter::Attack()
 {
 
+
+	UE_LOG(LogTemp, Log, TEXT("clicked"));
+
 	//have we selected anyone?
 	bool selected = false;
 	for (AEnemy* enemy : this->enemy_list)
@@ -87,16 +90,16 @@ void AFirstCharacter::Attack()
 	else
 	{
 		//attack the enemy we have selected.
-		UE_LOG(LogTemp, Log, TEXT("before %d"), current_target->Health);
+		UE_LOG(LogTemp, Log, TEXT("enemy before %d"), current_target->Health);
 		current_target->Health -= this->Damage;
 		current_target->IsTargeted = false;
 		if(current_target->Health <= 0)
 		{
 			UE_LOG(LogTemp, Log, TEXT("Target Eliminated!"));
-			current_target->Destroy();
+			current_target->SetActorHiddenInGame(true);
 		}
 
-		UE_LOG(LogTemp, Log, TEXT("after %d"), current_target->Health);
+		UE_LOG(LogTemp, Log, TEXT("enemy after %d"), current_target->Health);
 		AttacksFinished = true;
 		EndTurn();
 
@@ -114,6 +117,7 @@ void AFirstCharacter::EndTurn()
 	if (AttacksFinished == true)
 	{
 		PlayerTurnFinished = true;
+		PlayerTurn = false;
 		UE_LOG(LogTemp, Log, TEXT("Turn has ended"));
 	}
 }
